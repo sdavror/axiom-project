@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Axiom — World Politics Without Noise</title>
+  <meta name="description" content="Axiom covers global politics with depth and restraint. Geopolitics, diplomacy, conflict, and elections — explained clearly for people who want to understand, not just follow." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://axiom.press/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://axiom.press/" />
+  <meta property="og:title" content="Axiom — World Politics Without Noise" />
+  <meta property="og:description" content="Global politics with depth and restraint. Independent analysis since 2024." />
+  <meta property="og:image" content="https://axiom.press/og.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Axiom" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@axiompress" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"Axiom","url":"https://axiom.press","description":"Independent global politics analysis","foundingDate":"2024","inLanguage":"en"}
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ════════════════════════════════════════════════
+       AXIOM — DESIGN TOKENS
+       All visual decisions live here.
+       Edit these variables to restyle the entire site.
+    ════════════════════════════════════════════════ */
+    :root {
+      /* — Palette — */
+      --c-bg:        #FAFAF8;   /* warm off-white page background   */
+      --c-card:      #F0EDE6;   /* parchment card surfaces          */
+      --c-ink:       #0A0A0B;   /* near-black primary text          */
+      --c-ink-2:     #6B6860;   /* muted secondary text             */
+      --c-ink-3:     #AEAAA3;   /* captions, timestamps             */
+      --c-accent:    #C4390A;   /* terracotta red — single accent   */
+      --c-accent-hv: #A02E07;   /* accent hover                     */
+      --c-border:    #E0DDD7;   /* hairline dividers                */
+      --c-border-s:  #ECEAE5;   /* softer divider                   */
+      --c-nav-bg:    rgba(250,250,248,0.88); /* glass nav           */
+
+      /* — Type scale — */
+      --f-display: 'Playfair Display', Georgia, serif;
+      --f-ui:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* — Spacing — */
+      --sp-xs:  6px;
+      --sp-sm:  14px;
+      --sp-md:  24px;
+      --sp-lg:  48px;
+      --sp-xl:  80px;
+      --sp-2xl: 128px;
+
+      /* — Layout — */
+      --max-w:     1100px;
+      --r-sm:      4px;
+      --r-md:      10px;
+      --r-lg:      18px;
+
+      /* — Motion — */
+      --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ════════════════════════════════════════════════
+       RESET
+    ════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-ui);
+      background: var(--c-bg);
+      color: var(--c-ink);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* ════════════════════════════════════════════════
+       LAYOUT HELPERS
+    ════════════════════════════════════════════════ */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--sp-md);
+    }
+
+    /* ════════════════════════════════════════════════
+       NAVIGATION
+    ════════════════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      background: var(--c-nav-bg);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 0.5px solid var(--c-border);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--sp-md);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-lg);
+    }
+    .nav-logo {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--c-ink);
+      flex-shrink: 0;
+      transition: opacity .2s;
+    }
+    .nav-logo:hover { opacity: .6; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 0;
+      flex: 1;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--c-ink-2);
+      padding: 6px 12px;
+      border-radius: var(--r-sm);
+      transition: color .15s;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--c-ink); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      margin-left: auto;
+    }
+    .nav-search {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--c-ink-2);
+      padding: 6px 10px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: color .15s;
+    }
+    .nav-search:hover { color: var(--c-ink); }
+
+    .btn-subscribe {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--c-ink);
+      padding: 8px 18px;
+      border-radius: 100px;
+      transition: background .2s;
+    }
+    .btn-subscribe:hover { background: #2a2a2c; }
+
+    /* mobile toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 6px;
+      margin-left: auto;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--c-ink);
+      transition: transform .3s, opacity .2s;
+    }
+
+    /* ════════════════════════════════════════════════
+       HERO — THE SIGNATURE ELEMENT
+       A single large italic editorial statement.
+       Everything else on the page is quieter than this.
+    ════════════════════════════════════════════════ */
+    .hero {
+      padding: var(--sp-2xl) 0 var(--sp-xl);
+      border-bottom: 0.5px solid var(--c-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle background texture — a near-invisible grid */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--c-border-s) 1px, transparent 1px),
+        linear-gradient(90deg, var(--c-border-s) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* The eyebrow label above the quote */
+    .hero-eyebrow {
+      font-family: var(--f-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin-bottom: var(--sp-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 1.5px;
+      background: var(--c-accent);
+      flex-shrink: 0;
+    }
+
+    /* THE SIGNATURE: giant italic quote */
+    .hero-quote {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(38px, 6.5vw, 86px);
+      line-height: 1.06;
+      color: var(--c-ink);
+      max-width: 880px;
+      letter-spacing: -0.5px;
+
+      /* load animation */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroReveal 1s var(--ease) 0.1s forwards;
+    }
+
+    @keyframes heroReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Highlighted word in accent colour */
+    .hero-quote em {
+      color: var(--c-accent);
+      font-style: italic;
+    }
+
+    .hero-caption {
+      margin-top: var(--sp-lg);
+      font-size: 14px;
+      color: var(--c-ink-3);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      flex-wrap: wrap;
+
+      opacity: 0;
+      animation: heroReveal .8s var(--ease) 0.55s forwards;
+    }
+    .hero-caption-divider { width: 1px; height: 14px; background: var(--c-border); }
+
+    /* Stats row */
+    .hero-stats {
+      margin-top: var(--sp-lg);
+      display: flex;
+      gap: var(--sp-lg);
+      flex-wrap: wrap;
+
+      opacity: 0;
+      animation: heroReveal .8s var(--ease) 0.75s forwards;
+    }
+    .hero-stat { display: flex; flex-direction: column; }
+    .hero-stat-n {
+      font-family: var(--f-display);
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--c-ink);
+      line-height: 1;
+    }
+    .hero-stat-l {
+      font-size: 11px;
+      color: var(--c-ink-3);
+      letter-spacing: .5px;
+      margin-top: 3px;
+    }
+
+    /* ════════════════════════════════════════════════
+       LIVE TICKER — understated single line
+    ════════════════════════════════════════════════ */
+    .ticker {
+      display: flex;
+      align-items: center;
+      height: 38px;
+      overflow: hidden;
+      border-bottom: 0.5px solid var(--c-border-s);
+      background: var(--c-bg);
+    }
+    .ticker-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      padding: 0 18px 0 0;
+      flex-shrink: 0;
+      border-right: 0.5px solid var(--c-border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+    .ticker-body { flex: 1; overflow: hidden; }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: tickRoll 55s linear infinite;
+    }
+    .ticker-item {
+      font-size: 12px;
+      color: var(--c-ink-2);
+      padding: 0 44px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ticker-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--c-accent);
+      flex-shrink: 0;
+    }
+    @keyframes tickRoll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ════════════════════════════════════════════════
+       SECTION LABELS
+    ════════════════════════════════════════════════ */
+    .sec-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--c-ink-3);
+      margin-bottom: var(--sp-md);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--c-border);
+    }
+
+    /* ════════════════════════════════════════════════
+       TAG PILLS
+    ════════════════════════════════════════════════ */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+    }
+    .tag-geo   { background: #FEF2EE; color: #C4390A; }
+    .tag-diplo { background: #F0EFFE; color: #5B36C8; }
+    .tag-econ  { background: #EDFBF2; color: #166534; }
+    .tag-sec   { background: #FFF4F4; color: #9B1C1C; }
+    .tag-elect { background: #FEFCE8; color: #854D0E; }
+    .tag-env   { background: #F0FDF4; color: #14532D; }
+
+    /* ════════════════════════════════════════════════
+       FEATURED SECTION — 3-column asymmetric grid
+    ════════════════════════════════════════════════ */
+    .featured { padding: var(--sp-xl) 0 0; }
+
+    .featured-grid {
+      display: grid;
+      /* col 1: wide lead story | col 2: medium | col 3: 2 stacked */
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--c-border-s);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .f-card {
+      background: var(--c-bg);
+      padding: var(--sp-lg) var(--sp-md);
+      cursor: pointer;
+      transition: background .2s;
+      position: relative;
+    }
+    .f-card:hover { background: var(--c-card); }
+
+    /* Lead card */
+    .f-card.lead {
+      grid-row: 1 / 3;
+      padding: var(--sp-lg);
+      border-right: 1px solid var(--c-border-s);
+    }
+
+    /* Medium card */
+    .f-card.mid {
+      grid-column: 2;
+      grid-row: 1;
+      border-bottom: 1px solid var(--c-border-s);
+      border-right: 1px solid var(--c-border-s);
+    }
+
+    /* Right-top */
+    .f-card.rt { grid-column: 3; grid-row: 1; border-bottom: 1px solid var(--c-border-s); }
+
+    /* Right-bottom */
+    .f-card.rb { grid-column: 2 / 4; grid-row: 2; }
+
+    .f-card .card-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--c-ink-3);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .f-card h2 {
+      font-family: var(--f-display);
+      font-weight: 500;
+      color: var(--c-ink);
+      line-height: 1.18;
+    }
+    .f-card.lead h2 { font-size: clamp(24px, 2.8vw, 36px); margin-bottom: var(--sp-sm); }
+    .f-card.mid  h2 { font-size: 20px; margin-bottom: 8px; }
+    .f-card.rt   h2 { font-size: 18px; margin-bottom: 8px; }
+    .f-card.rb   h2 { font-size: 20px; margin-bottom: 8px; }
+
+    .f-card p.card-desc {
+      font-size: 14px;
+      color: var(--c-ink-2);
+      line-height: 1.6;
+      margin-bottom: var(--sp-sm);
+    }
+    .f-card.mid p.card-desc,
+    .f-card.rt  p.card-desc { font-size: 13px; }
+
+    .card-byline {
+      font-size: 12px;
+      color: var(--c-ink-3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .card-byline strong { color: var(--c-ink-2); font-weight: 500; }
+
+    /* read-more link */
+    .card-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--c-accent);
+      margin-top: var(--sp-md);
+      transition: gap .2s;
+    }
+    .card-more:hover { gap: 9px; }
+    .card-more-arrow { font-size: 15px; line-height: 1; }
+
+    /* ════════════════════════════════════════════════
+       REGION FILTER PILLS
+    ════════════════════════════════════════════════ */
+    .regions { padding: var(--sp-xl) 0 0; }
+
+    .region-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-lg);
+    }
+    .region-btn {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--c-ink-2);
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 0.5px solid var(--c-border);
+      background: transparent;
+      transition: all .2s;
+    }
+    .region-btn:hover { border-color: var(--c-ink); color: var(--c-ink); }
+    .region-btn.active {
+      background: var(--c-ink);
+      color: #fff;
+      border-color: var(--c-ink);
+    }
+
+    /* ════════════════════════════════════════════════
+       ARTICLE GRID
+    ════════════════════════════════════════════════ */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--c-border-s);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .a-card {
+      background: var(--c-bg);
+      padding: var(--sp-md);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .a-card:hover { background: var(--c-card); }
+    .a-card h3 {
+      font-family: var(--f-display);
+      font-size: 19px;
+      font-weight: 400;
+      line-height: 1.25;
+      margin: 8px 0;
+      color: var(--c-ink);
+    }
+    .a-card p {
+      font-size: 13px;
+      color: var(--c-ink-2);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    /* ════════════════════════════════════════════════
+       CONFLICT MONITOR
+    ════════════════════════════════════════════════ */
+    .monitor { padding: var(--sp-xl) 0 0; }
+
+    .monitor-box {
+      background: var(--c-card);
+      border-radius: var(--r-lg);
+      padding: var(--sp-lg);
+      border: 0.5px solid var(--c-border);
+    }
+
+    .monitor-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--sp-lg);
+      flex-wrap: wrap;
+      gap: var(--sp-sm);
+    }
+    .monitor-title {
+      font-family: var(--f-display);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--c-ink);
+    }
+    .monitor-sub {
+      font-size: 12px;
+      color: var(--c-ink-3);
+      margin-top: 4px;
+    }
+
+    .monitor-tabs {
+      display: flex;
+      gap: 2px;
+      background: var(--c-border-s);
+      padding: 3px;
+      border-radius: var(--r-sm);
+    }
+    .m-tab {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--c-ink-2);
+      padding: 5px 12px;
+      border-radius: 3px;
+      transition: all .2s;
+    }
+    .m-tab.active {
+      background: var(--c-bg);
+      color: var(--c-ink);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .conflict-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .c-row {
+      display: grid;
+      grid-template-columns: 190px 1fr 96px 110px;
+      align-items: center;
+      gap: var(--sp-md);
+      padding: 12px var(--sp-sm);
+      border-radius: var(--r-sm);
+      background: var(--c-bg);
+      cursor: pointer;
+      transition: background .2s;
+      font-size: 13px;
+    }
+    .c-row:hover { background: #EDEAE3; }
+
+    .c-name { font-weight: 500; color: var(--c-ink); }
+    .c-region { font-size: 11px; color: var(--c-ink-3); margin-top: 2px; }
+
+    .c-bar-wrap { background: var(--c-border-s); border-radius: 2px; height: 5px; overflow: hidden; }
+    .c-bar { height: 100%; border-radius: 2px; transition: width 1.2s var(--ease); }
+
+    .c-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 100px;
+      text-align: center;
+    }
+    .badge-high   { background: #FEE2E2; color: #991B1B; }
+    .badge-med    { background: #FEF3C7; color: #92400E; }
+    .badge-low    { background: #D1FAE5; color: #065F46; }
+    .badge-frozen { background: #EDE9FE; color: #5B21B6; }
+
+    .c-date { font-size: 11px; color: var(--c-ink-3); text-align: right; }
+
+    /* ════════════════════════════════════════════════
+       OPINION / ANALYSIS SECTION
+    ════════════════════════════════════════════════ */
+    .opinion { padding: var(--sp-xl) 0 0; }
+
+    .opinion-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1px;
+      background: var(--c-border-s);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .op-card {
+      background: var(--c-bg);
+      padding: var(--sp-lg) var(--sp-md);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .op-card:hover { background: var(--c-card); }
+
+    /* Dark inverse card */
+    .op-card.dark {
+      background: var(--c-ink);
+    }
+    .op-card.dark:hover { background: #1a1a1c; }
+    .op-card.dark .card-eyebrow { color: rgba(255,255,255,0.3); }
+    .op-card.dark h2            { color: #fff; }
+    .op-card.dark p             { color: rgba(255,255,255,0.5); }
+    .op-card.dark .card-byline  { color: rgba(255,255,255,0.3); }
+    .op-card.dark .card-byline strong { color: rgba(255,255,255,0.6); }
+
+    .op-card h2 {
+      font-family: var(--f-display);
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 500;
+      line-height: 1.18;
+      color: var(--c-ink);
+      margin: 10px 0;
+    }
+    .op-card p {
+      font-size: 14px;
+      color: var(--c-ink-2);
+      line-height: 1.6;
+      margin-bottom: var(--sp-sm);
+    }
+
+    .author-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: var(--sp-sm);
+    }
+    .author-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--c-accent);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .author-avatar.purple { background: #5B36C8; }
+    .author-avatar.green  { background: #166534; }
+    .author-name   { font-size: 13px; font-weight: 500; color: var(--c-ink-2); }
+    .author-role   { font-size: 11px; color: var(--c-ink-3); }
+    .op-card.dark .author-name { color: rgba(255,255,255,0.6); }
+    .op-card.dark .author-role { color: rgba(255,255,255,0.3); }
+
+    /* Right column stacked */
+    .op-stack { display: flex; flex-direction: column; gap: 1px; background: var(--c-border-s); }
+    .op-stack .op-card { padding: var(--sp-md); }
+    .op-stack .op-card h2 { font-size: 18px; margin: 8px 0; }
+
+    /* ════════════════════════════════════════════════
+       DATA SNAPSHOT — inline numbers
+    ════════════════════════════════════════════════ */
+    .snapshot { padding: var(--sp-xl) 0 0; }
+
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--c-border-s);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .snap-cell {
+      background: var(--c-bg);
+      padding: var(--sp-lg) var(--sp-md);
+      text-align: center;
+      cursor: default;
+      transition: background .2s;
+    }
+    .snap-cell:hover { background: var(--c-card); }
+    .snap-num {
+      font-family: var(--f-display);
+      font-size: 44px;
+      font-weight: 500;
+      color: var(--c-ink);
+      line-height: 1;
+    }
+    .snap-num.accent { color: var(--c-accent); }
+    .snap-label {
+      font-size: 12px;
+      color: var(--c-ink-3);
+      margin-top: 6px;
+      letter-spacing: .3px;
+    }
+    .snap-delta {
+      font-size: 11px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .snap-delta.up   { color: #166534; }
+    .snap-delta.down { color: #C4390A; }
+
+    /* ════════════════════════════════════════════════
+       NEWSLETTER
+    ════════════════════════════════════════════════ */
+    .newsletter { padding: var(--sp-xl) 0; }
+
+    .nl-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--c-ink);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+
+    .nl-left {
+      padding: var(--sp-xl) var(--sp-lg);
+      border-right: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .nl-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin-bottom: var(--sp-sm);
+    }
+    .nl-left h2 {
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: var(--sp-sm);
+    }
+    .nl-left p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      max-width: 340px;
+    }
+
+    .nl-right {
+      padding: var(--sp-xl) var(--sp-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .nl-right label {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: .5px;
+      margin-bottom: 8px;
+    }
+    .nl-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 0.5px solid rgba(255,255,255,0.14);
+      border-radius: var(--r-md);
+      padding: 13px 16px;
+      font-size: 15px;
+      color: #fff;
+      font-family: var(--f-ui);
+      outline: none;
+      margin-bottom: 10px;
+      transition: border-color .2s, background .2s;
+    }
+    .nl-input::placeholder { color: rgba(255,255,255,0.25); }
+    .nl-input:focus { border-color: var(--c-accent); background: rgba(255,255,255,0.1); }
+    .nl-btn {
+      width: 100%;
+      background: var(--c-accent);
+      color: #fff;
+      padding: 13px;
+      border-radius: var(--r-md);
+      font-size: 15px;
+      font-weight: 500;
+      font-family: var(--f-ui);
+      transition: background .2s;
+    }
+    .nl-btn:hover { background: var(--c-accent-hv); }
+    .nl-msg {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 10px;
+      min-height: 16px;
+    }
+    .nl-msg.ok { color: #6EE7B7; }
+    .nl-msg.err { color: #FCA5A5; }
+
+    /* ════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════ */
+    footer {
+      border-top: 0.5px solid var(--c-border);
+      padding: var(--sp-lg) 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 220px repeat(3, 1fr);
+      gap: var(--sp-lg);
+    }
+    .footer-brand-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--c-ink);
+      margin-bottom: 8px;
+    }
+    .footer-brand-tag {
+      font-size: 13px;
+      color: var(--c-ink-3);
+      line-height: 1.55;
+      max-width: 170px;
+    }
+    .footer-col h4 {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--c-ink-3);
+      margin-bottom: var(--sp-sm);
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a {
+      font-size: 14px;
+      color: var(--c-ink-2);
+      transition: color .15s;
+    }
+    .footer-col a:hover { color: var(--c-accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: var(--sp-md);
+      margin-top: var(--sp-md);
+      border-top: 0.5px solid var(--c-border-s);
+      font-size: 12px;
+      color: var(--c-ink-3);
+    }
+    .footer-bottom a { color: var(--c-ink-3); transition: color .15s; }
+    .footer-bottom a:hover { color: var(--c-accent); }
+
+    /* ════════════════════════════════════════════════
+       MODAL
+    ════════════════════════════════════════════════ */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-md);
+    }
+    .modal-bg.open { display: flex; }
+
+    .modal {
+      background: var(--c-bg);
+      border-radius: var(--r-lg);
+      max-width: 660px;
+      width: 100%;
+      max-height: 86vh;
+      overflow-y: auto;
+      padding: var(--sp-lg);
+      position: relative;
+      animation: modIn .3s var(--ease);
+    }
+    @keyframes modIn {
+      from { opacity:0; transform: scale(.95) translateY(16px); }
+      to   { opacity:1; transform: scale(1)   translateY(0); }
+    }
+
+    .modal-x {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--c-card);
+      border: 0.5px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--c-ink-2);
+      transition: background .15s;
+    }
+    .modal-x:hover { background: var(--c-border); }
+
+    .modal h2 {
+      font-family: var(--f-display);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--c-ink);
+      margin: var(--sp-md) 0 8px;
+    }
+    .modal-meta {
+      font-size: 12px;
+      color: var(--c-ink-3);
+      display: flex;
+      gap: 12px;
+      margin-bottom: var(--sp-md);
+      flex-wrap: wrap;
+    }
+    .modal-meta strong { color: var(--c-ink-2); font-weight: 500; }
+    .modal-body p {
+      font-size: 16px;
+      color: var(--c-ink);
+      line-height: 1.8;
+      margin-bottom: var(--sp-sm);
+    }
+    .modal-body p:first-child::first-letter {
+      font-family: var(--f-display);
+      font-size: 54px;
+      font-weight: 500;
+      float: left;
+      line-height: .82;
+      margin: 8px 8px 0 0;
+      color: var(--c-accent);
+    }
+
+    /* ════════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .featured-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .f-card.lead { grid-row: auto; grid-column: 1 / 3; border-right: none; border-bottom: 1px solid var(--c-border-s); }
+      .f-card.mid  { grid-column: 1; border-right: 1px solid var(--c-border-s); }
+      .f-card.rt   { grid-column: 2; }
+      .f-card.rb   { grid-column: 1 / 3; }
+      .articles-grid { grid-template-columns: 1fr 1fr; }
+      .snapshot-grid { grid-template-columns: 1fr 1fr; }
+      .opinion-grid  { grid-template-columns: 1fr; }
+      .nl-box        { grid-template-columns: 1fr; }
+      .nl-left       { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
+      .footer-grid   { grid-template-columns: 1fr 1fr; }
+      .c-row         { grid-template-columns: 1fr auto; }
+      .c-bar-wrap, .c-date { display: none; }
+    }
+
+    @media (max-width: 620px) {
+      .nav-links, .nav-right { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 54px; left: 0; right: 0; bottom: 0;
+        background: var(--c-bg);
+        padding: var(--sp-md);
+        gap: 4px;
+        z-index: 299;
+      }
+      .nav-toggle { display: flex; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .footer-grid   { grid-template-columns: 1fr; }
+      .hero-stats    { gap: var(--sp-md); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-quote, .hero-caption, .hero-stats { animation: none; opacity: 1; transform: none; }
+      .ticker-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Axiom home">AXIOM</a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#" class="active" onclick="filterRegion('all',this);return false">All</a></li>
+      <li><a href="#" onclick="filterRegion('europe',this);return false">Europe</a></li>
+      <li><a href="#" onclick="filterRegion('asia',this);return false">Asia</a></li>
+      <li><a href="#" onclick="filterRegion('americas',this);return false">Americas</a></li>
+      <li><a href="#" onclick="filterRegion('mideast',this);return false">Middle East</a></li>
+      <li><a href="#" onclick="filterRegion('africa',this);return false">Africa</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <div class="nav-search" role="button" tabindex="0" aria-label="Search">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5"/><path d="M12 12l-2.5-2.5"/></svg>
+        Search
+      </div>
+      <a href="#newsletter" class="btn-subscribe">Subscribe</a>
+    </div>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" aria-label="Editorial statement">
+  <div class="hero-inner wrap">
+
+    <div class="hero-eyebrow">World Politics</div>
+
+    <!-- SIGNATURE ELEMENT: the giant italic quote -->
+    <p class="hero-quote">
+      Power does not disappear.<br>
+      It only changes <em>address.</em>
+    </p>
+
+    <div class="hero-caption">
+      <span>Independent analysis since 2024</span>
+      <span class="hero-caption-divider" aria-hidden="true"></span>
+      <span>No paywalls on core coverage</span>
+      <span class="hero-caption-divider" aria-hidden="true"></span>
+      <span>Updated daily</span>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-n">195</span>
+        <span class="hero-stat-l">nations tracked</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">42</span>
+        <span class="hero-stat-l">active conflicts</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">31</span>
+        <span class="hero-stat-l">elections this year</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">12</span>
+        <span class="hero-stat-l">resident correspondents</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     LIVE TICKER
+══════════════════════════════════════════ -->
+<div class="ticker" role="marquee" aria-label="Breaking news">
+  <div class="ticker-label">Now</div>
+  <div class="ticker-body">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>G7 summit opens with Ukraine reconstruction at top of agenda</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>UN Security Council votes on West Africa peacekeeping expansion</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>NATO confirms permanent battalion deployment to Baltic states</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>IMF revises 2025 global growth forecast to 3.1 percent</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Seoul and Tokyo sign landmark bilateral security agreement</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>EU Parliament adopts AI Governance Act with 412 votes in favour</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="ticker-dot"></span>G7 summit opens with Ukraine reconstruction at top of agenda</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>UN Security Council votes on West Africa peacekeeping expansion</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>NATO confirms permanent battalion deployment to Baltic states</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>IMF revises 2025 global growth forecast to 3.1 percent</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Seoul and Tokyo sign landmark bilateral security agreement</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>EU Parliament adopts AI Governance Act with 412 votes in favour</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FEATURED STORIES
+══════════════════════════════════════════ -->
+<section class="featured wrap">
+  <div class="sec-label">Featured this week</div>
+
+  <div class="featured-grid">
+
+    <article class="f-card lead" onclick="openModal('f1')" data-region="europe">
+      <div class="card-eyebrow">Europe<span class="tag tag-geo" style="margin-left:auto">Geopolitics</span></div>
+      <h2>NATO's New Posture: From Reassurance to Deterrence by Denial</h2>
+      <p class="card-desc">Three years on, the alliance's eastern flank has been fundamentally redrawn. Permanent basing, pre-positioned armour, and a new command philosophy that treats the eastern frontier as the primary theatre — not a flank. What is actually being built, and where the limits are.</p>
+      <a class="card-more" href="#" onclick="openModal('f1');return false">Read analysis <span class="card-more-arrow">→</span></a>
+      <div class="card-byline" style="margin-top:20px">
+        <strong>Elena Marchetti</strong> · Senior Europe Correspondent · 14 min
+      </div>
+    </article>
+
+    <article class="f-card mid" onclick="openModal('f2')" data-region="asia">
+      <div class="card-eyebrow">Asia-Pacific<span class="tag tag-diplo" style="margin-left:auto">Diplomacy</span></div>
+      <h2>The Quad's Quiet Transformation</h2>
+      <p class="card-desc">What began as diplomatic dialogue has acquired the infrastructure of a security pact. The strategic implications for Beijing.</p>
+      <div class="card-byline"><strong>James Okafor</strong> · 9 min</div>
+    </article>
+
+    <article class="f-card rt" onclick="openModal('f3')" data-region="americas">
+      <div class="card-eyebrow">Americas<span class="tag tag-elect" style="margin-left:auto">Election</span></div>
+      <h2>Latin America's Left Wave: Durable or Cyclical?</h2>
+      <p class="card-desc">Seven major economies, left-leaning governments. The structural factors — and the limits.</p>
+      <div class="card-byline"><strong>Sofia Reyes</strong> · 11 min</div>
+    </article>
+
+    <article class="f-card rb" onclick="openModal('f4')" data-region="mideast">
+      <div class="card-eyebrow">Middle East<span class="tag tag-sec" style="margin-left:auto">Security</span></div>
+      <h2>Gulf States and the New Geometry of Regional Power</h2>
+      <p class="card-desc">Saudi–Iran normalisation and a multi-polar Middle East that no longer waits for Washington's lead. What the new architecture means for the region's balance of power.</p>
+      <div class="card-byline"><strong>Omar Al-Rashid</strong> · 8 min</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     REGION FILTER + ARTICLE GRID
+══════════════════════════════════════════ -->
+<section class="regions wrap">
+  <div class="sec-label">Latest articles</div>
+
+  <div class="region-row" role="group" aria-label="Filter by region">
+    <button class="region-btn active" onclick="filterRegion('all',this)">All regions</button>
+    <button class="region-btn" onclick="filterRegion('europe',this)">Europe</button>
+    <button class="region-btn" onclick="filterRegion('asia',this)">Asia-Pacific</button>
+    <button class="region-btn" onclick="filterRegion('americas',this)">Americas</button>
+    <button class="region-btn" onclick="filterRegion('mideast',this)">Middle East</button>
+    <button class="region-btn" onclick="filterRegion('africa',this)">Africa</button>
+  </div>
+
+  <div class="articles-grid" id="articles-grid">
+
+    <article class="a-card" onclick="openModal('a1')" data-region="europe">
+      <span class="tag tag-econ">Economy</span>
+      <h3>EU Strategic Autonomy: When Industrial Policy Meets Geopolitics</h3>
+      <p>Brussels is building economic defences against single-supplier dependency. Chips, batteries, critical minerals — and the cost of reshoring.</p>
+      <div class="card-byline"><strong>Elena Marchetti</strong> · 7 min</div>
+    </article>
+
+    <article class="a-card" onclick="openModal('a2')" data-region="africa">
+      <span class="tag tag-sec">Security</span>
+      <h3>Sahel After the Coups: Fragmentation and the Retreat of Western Influence</h3>
+      <p>A belt of military governments stretches across West Africa. Who drove the pattern — and who is filling the vacuum.</p>
+      <div class="card-byline"><strong>Amara Diallo</strong> · 10 min</div>
+    </article>
+
+    <article class="a-card" onclick="openModal('a3')" data-region="asia">
+      <span class="tag tag-geo">Geopolitics</span>
+      <h3>Xi's Third Term and the Logic of Strategic Risk-Taking</h3>
+      <p>How consolidation of power has changed China's foreign policy calculus — and what Beijing's risk appetite looks like now.</p>
+      <div class="card-byline"><strong>James Okafor</strong> · 12 min</div>
+    </article>
+
+    <article class="a-card" onclick="openModal('a4')" data-region="mideast">
+      <span class="tag tag-env">Climate</span>
+      <h3>Water as Weapon: Resource Scarcity Is Redrawing Middle Eastern Alliances</h3>
+      <p>The Tigris, Euphrates, and Jordan are at the centre of a slow-moving crisis — with fast-moving political consequences.</p>
+      <div class="card-byline"><strong>Omar Al-Rashid</strong> · 8 min</div>
+    </article>
+
+    <article class="a-card" onclick="openModal('a5')" data-region="americas">
+      <span class="tag tag-elect">Election</span>
+      <h3>Canada 2025: A Minority Parliament in a Polarised Era</h3>
+      <p>The snap election produced a fractured result. What the outcome says about Canadian voters and the road ahead.</p>
+      <div class="card-byline"><strong>Sofia Reyes</strong> · 6 min</div>
+    </article>
+
+    <article class="a-card" onclick="openModal('a6')" data-region="europe">
+      <span class="tag tag-geo">Geopolitics</span>
+      <h3>The Arctic's New Strategic Importance in Great Power Competition</h3>
+      <p>Melting ice, shipping routes, and an arming Russia. The five Arctic powers are not aligned — and the stakes are rising.</p>
+      <div class="card-byline"><strong>Elena Marchetti</strong> · 9 min</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     DATA SNAPSHOT
+══════════════════════════════════════════ -->
+<section class="snapshot wrap">
+  <div class="sec-label">Global snapshot · June 2025</div>
+  <div class="snapshot-grid">
+    <div class="snap-cell">
+      <div class="snap-num accent">42</div>
+      <div class="snap-label">Active armed conflicts</div>
+      <div class="snap-delta up">↑ 3 from Jan 2025</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-num">31</div>
+      <div class="snap-label">National elections in 2025</div>
+      <div class="snap-delta">12 completed</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-num">57</div>
+      <div class="snap-label">Electoral democracies (V-Dem)</div>
+      <div class="snap-delta down">↓ 4 from 2020</div>
+    </div>
+    <div class="snap-cell">
+      <div class="snap-num">3.1<span style="font-size:24px">%</span></div>
+      <div class="snap-label">IMF global growth forecast</div>
+      <div class="snap-delta down">↓ 0.3pp from Oct 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CONFLICT MONITOR
+══════════════════════════════════════════ -->
+<section class="monitor wrap">
+  <div class="sec-label">Conflict tracker</div>
+  <div class="monitor-box">
+    <div class="monitor-header">
+      <div>
+        <div class="monitor-title">Global Conflict Monitor</div>
+        <div class="monitor-sub">Updated daily · Source: ACLED, UNOCHA, CFR</div>
+      </div>
+      <div class="monitor-tabs">
+        <button class="m-tab active" onclick="conflictTab('all',this)">All</button>
+        <button class="m-tab" onclick="conflictTab('high',this)">High</button>
+        <button class="m-tab" onclick="conflictTab('frozen',this)">Frozen</button>
+      </div>
+    </div>
+
+    <div class="conflict-list" id="conflict-list">
+      <div class="c-row" data-level="high" onclick="openModal('c1')">
+        <div><div class="c-name">Russia–Ukraine War</div><div class="c-region">Eastern Europe</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:93%;background:#C4390A"></div></div>
+        <span class="c-badge badge-high">High</span>
+        <div class="c-date">Since Feb 2022</div>
+      </div>
+      <div class="c-row" data-level="high" onclick="openModal('c2')">
+        <div><div class="c-name">Sudan Civil War</div><div class="c-region">East Africa</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:87%;background:#C4390A"></div></div>
+        <span class="c-badge badge-high">High</span>
+        <div class="c-date">Since Apr 2023</div>
+      </div>
+      <div class="c-row" data-level="high" onclick="openModal('c3')">
+        <div><div class="c-name">Myanmar Civil Conflict</div><div class="c-region">Southeast Asia</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:76%;background:#92400E"></div></div>
+        <span class="c-badge badge-med">Medium</span>
+        <div class="c-date">Since Feb 2021</div>
+      </div>
+      <div class="c-row" data-level="high" onclick="openModal('c4')">
+        <div><div class="c-name">Yemen War</div><div class="c-region">Arabian Peninsula</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:64%;background:#92400E"></div></div>
+        <span class="c-badge badge-med">Medium</span>
+        <div class="c-date">Since 2015</div>
+      </div>
+      <div class="c-row" data-level="frozen" onclick="openModal('c5')">
+        <div><div class="c-name">Taiwan Strait Tensions</div><div class="c-region">East Asia</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:50%;background:#5B21B6"></div></div>
+        <span class="c-badge badge-frozen">Frozen</span>
+        <div class="c-date">Ongoing</div>
+      </div>
+      <div class="c-row" data-level="frozen" onclick="openModal('c6')">
+        <div><div class="c-name">Nagorno-Karabakh</div><div class="c-region">South Caucasus</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:18%;background:#065F46"></div></div>
+        <span class="c-badge badge-low">Low</span>
+        <div class="c-date">Post-2023 ceasefire</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     OPINION & ANALYSIS
+══════════════════════════════════════════ -->
+<section class="opinion wrap">
+  <div class="sec-label">Analysis & opinion</div>
+  <div class="opinion-grid">
+
+    <article class="op-card dark" onclick="openModal('op1')">
+      <div class="card-eyebrow">Long Read</div>
+      <h2>The Myth of the Liberal Order's Death</h2>
+      <p>Reports of multilateralism's collapse have been exaggerated before. Why the post-1945 architecture is more resilient than the headlines suggest — and where its real vulnerabilities lie.</p>
+      <div class="author-chip">
+        <div class="author-avatar">PW</div>
+        <div>
+          <div class="author-name">Prof. Peter Wolfe</div>
+          <div class="author-role">Harvard Kennedy School · 16 min</div>
+        </div>
+      </div>
+    </article>
+
+    <div class="op-stack">
+      <article class="op-card" onclick="openModal('op2')" style="flex:1">
+        <div class="card-eyebrow">Commentary</div>
+        <h2>Why Sanctions Rarely Achieve Their Stated Goals</h2>
+        <p>Three decades of data on economic coercion — the gap between expectation and result.</p>
+        <div class="author-chip">
+          <div class="author-avatar purple">NR</div>
+          <div>
+            <div class="author-name" style="color:var(--c-ink-2)">Dr. Natasha Romova</div>
+            <div class="author-role">10 min read</div>
+          </div>
+        </div>
+      </article>
+      <article class="op-card" onclick="openModal('op3')" style="flex:1">
+        <div class="card-eyebrow">Data Analysis</div>
+        <h2>Democracy Is Declining — But Not Where You Think</h2>
+        <p>V-Dem data shows the sharpest backsliding inside established democracies, not fragile states.</p>
+        <div class="author-chip">
+          <div class="author-avatar green">KH</div>
+          <div>
+            <div class="author-name" style="color:var(--c-ink-2)">Kenji Hayashi</div>
+            <div class="author-role">8 min read</div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     NEWSLETTER
+══════════════════════════════════════════ -->
+<section class="newsletter wrap" id="newsletter">
+  <div class="nl-box">
+    <div class="nl-left">
+      <div class="nl-eyebrow">The Axiom Brief</div>
+      <h2>Five stories. Five minutes. Every Sunday.</h2>
+      <p>The week in global politics — distilled without noise. Read by policymakers, students, and curious people in 60+ countries.</p>
+    </div>
+    <div class="nl-right">
+      <label for="nl-email">Your email address</label>
+      <input type="email" class="nl-input" id="nl-email" placeholder="you@example.com" autocomplete="email" />
+      <button class="nl-btn" onclick="subscribe()">Subscribe — it's free</button>
+      <div class="nl-msg" id="nl-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">AXIOM</div>
+        <p class="footer-brand-tag">World politics, clearly explained. Independent since 2024.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Regions</h4>
+        <ul>
+          <li><a href="#">Europe</a></li>
+          <li><a href="#">Asia-Pacific</a></li>
+          <li><a href="#">Americas</a></li>
+          <li><a href="#">Middle East</a></li>
+          <li><a href="#">Africa</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="#">Geopolitics</a></li>
+          <li><a href="#">Elections</a></li>
+          <li><a href="#">Diplomacy</a></li>
+          <li><a href="#">Economy</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Climate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Axiom</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Editorial policy</a></li>
+          <li><a href="#">Our journalists</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Advertise</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Axiom Press. All rights reserved.</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     ARTICLE MODAL
+══════════════════════════════════════════ -->
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()" role="dialog" aria-modal="true">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()" aria-label="Close">✕</button>
+    <div id="modal-inner"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+  /* ── Content database ── */
+  const DB = {
+    f1: { tag:'tag-geo', tagL:'Geopolitics', region:'Europe',
+      title:"NATO's New Posture: From Reassurance to Deterrence by Denial",
+      author:'Elena Marchetti', role:'Senior Europe Correspondent', time:'14 min read',
+      body:`<p>When Sweden and Finland acceded to NATO, the Baltic Sea became — almost overnight — a NATO lake. That geographic shift eliminated a potential vulnerability Russian planners had long factored into their calculations, and it set in motion a restructuring of alliance force posture that is still underway.</p>
+      <p>The shift in doctrine is subtler but more significant. NATO's original eastern posture — established after the 2014 annexation of Crimea — was one of reassurance: a tripwire presence designed to signal political commitment rather than provide credible military defence. What is being built now is deterrence by denial: forces, pre-positioned equipment, and command structures capable of denying a conventional offensive its objectives in the initial hours of conflict, before reinforcements arrive.</p>
+      <p>The logic is clear in military terms. But its durability depends on political will, which in democracies is a variable. The 2025 data show 23 of 32 allies meeting the 2% GDP defence spending target — up from nine in 2022. That shift is durable in some capitals and deeply uncertain in others.</p>` },
+    f2: { tag:'tag-diplo', tagL:'Diplomacy', region:'Asia-Pacific',
+      title:"The Quad's Quiet Transformation",
+      author:'James Okafor', role:'Asia-Pacific Correspondent', time:'9 min read',
+      body:`<p>The Quadrilateral Security Dialogue was never intended to be a formal alliance. When the US, Japan, Australia, and India revived it in 2017, the official framing — "a free and open Indo-Pacific" — was deliberately vague, designed to preserve optionality while avoiding the kind of provocation that a formal security architecture might produce.</p>
+      <p>That ambiguity is dissolving. Since 2022, the four nations have conducted joint naval exercises, coordinated intelligence sharing on Chinese military movements, and established supply chain security frameworks that serve dual civilian and defence purposes. The infrastructure of an alliance is being laid without the declaration of one.</p>
+      <p>India remains the most reluctant partner, balancing Quad engagement with continued Russian military procurement and a non-alignment tradition that runs deep. Yet even New Delhi has shifted — particularly after the 2020 Galwan Valley clashes, which produced a political shock that years of diplomatic language had not.</p>` },
+    f3: { tag:'tag-elect', tagL:'Election', region:'Americas',
+      title:"Latin America's Left Wave: Durable or Cyclical?",
+      author:'Sofia Reyes', role:'Americas Correspondent', time:'11 min read',
+      body:`<p>In four years, Mexico, Chile, Colombia, Brazil, and Honduras all elected left or centre-left governments. Bolivia returned to the MAS. The pattern is striking — but what does it actually mean?</p>
+      <p>The structural reading focuses on inequality. Latin America remains the most unequal region on Earth by Gini coefficient, and pandemic-era suffering fell disproportionately on informal workers and the urban poor — precisely the constituencies that propelled left candidates to victory. The anger was real, the channel obvious.</p>
+      <p>The cyclical reading points to incumbency. Every governing party in the region lost the first major election after the pandemic. The left happened to be in opposition in most large economies at that moment. The party out of power during a crisis tends to win the next election — regardless of ideology. Which explanation you favour determines whether you expect the wave to continue or reverse.</p>` },
+    f4: { tag:'tag-sec', tagL:'Security', region:'Middle East',
+      title:"Gulf States and the New Geometry of Regional Power",
+      author:'Omar Al-Rashid', role:'Middle East Correspondent', time:'8 min read',
+      body:`<p>The March 2023 Beijing-brokered normalisation between Saudi Arabia and Iran was, by any measure, a remarkable piece of Chinese diplomacy. It was also a signal: the Gulf states were willing — for the first time since the Cold War — to manage their own security architecture without deferring to Washington.</p>
+      <p>What has emerged is a Gulf foreign policy that is genuinely multi-vector: security cooperation with the United States, economic partnership with China, diplomatic hedging with Russia, selective engagement with Israel. The era of automatic alignment is over — not from hostility, but because credible alternatives now exist.</p>` },
+    a1: { tag:'tag-econ', tagL:'Economy', region:'Europe',
+      title:"EU Strategic Autonomy: When Industrial Policy Meets Geopolitics",
+      author:'Elena Marchetti', role:'Senior Europe Correspondent', time:'7 min read',
+      body:`<p>The Critical Raw Materials Act, the Net-Zero Industry Act, the European Chips Act — these share a common architecture: deploy state resources to reduce European dependency on single suppliers, overwhelmingly China, for technologies essential to both the green transition and defence production.</p>
+      <p>The turn is philosophically significant for an institution that spent three decades preaching market liberalism. Brussels is now explicitly industrial policy territory. The debate is no longer whether to intervene, but how much, how fast, and who bears the cost of reshoring supply chains that globalisation made efficient by making them fragile.</p>` },
+    a2: { tag:'tag-sec', tagL:'Security', region:'Africa',
+      title:"Sahel After the Coups: Fragmentation and the Retreat of Western Influence",
+      author:'Amara Diallo', role:'Africa Correspondent', time:'10 min read',
+      body:`<p>Since 2020, military coups have toppled governments in Mali (twice), Burkina Faso (twice), Guinea, Niger, Chad, and Gabon. A belt of juntas stretches across West Africa — and the French military presence that underpinned counterterrorism operations across the region has been expelled from each country in turn.</p>
+      <p>The vacuum is being filled unevenly. Russia's Africa Corps has expanded its footprint in Mali and Burkina Faso, offering security guarantees with fewer accountability conditions than Western partnerships. China has deepened economic ties. Turkey has sold drones. Regional bloc ECOWAS has struggled to impose consequences.</p>` },
+    a3: { tag:'tag-geo', tagL:'Geopolitics', region:'Asia',
+      title:"Xi's Third Term and the Logic of Strategic Risk-Taking",
+      author:'James Okafor', role:'Asia-Pacific Correspondent', time:'12 min read',
+      body:`<p>When Xi Jinping secured his unprecedented third term in October 2022, the Central Committee he assembled was the most ideologically homogeneous in a generation. The pragmatist technocrats who had tempered foreign policy adventurism under earlier leaderships were gone. The signal was deliberate.</p>
+      <p>What has followed is a foreign policy more assertive on Taiwan, less inhibited in the South China Sea, and more willing to use economic coercion against states that take positions China dislikes — before recalibrating when the costs become too high. It is not recklessness. It is calibrated pressure-testing of what the international system will absorb.</p>` },
+    a4: { tag:'tag-env', tagL:'Climate', region:'Middle East',
+      title:"Water as Weapon: Resource Scarcity Is Redrawing Middle Eastern Alliances",
+      author:'Omar Al-Rashid', role:'Middle East Correspondent', time:'8 min read',
+      body:`<p>The Euphrates carries roughly 40% less water than it did in 1970. The Tigris is similarly depleted. The Jordan barely reaches the Dead Sea in a normal year. Climate change is accelerating all three trends.</p>
+      <p>In 2022 and 2023, southern Iraq recorded temperatures above 50°C for extended periods. Agricultural output in the lower Mesopotamian plain fell by over 30%. The politics of water scarcity — long a slow background variable in regional diplomacy — is becoming a foreground crisis.</p>` },
+    a5: { tag:'tag-elect', tagL:'Election', region:'Americas',
+      title:"Canada 2025: A Minority Parliament in a Polarised Era",
+      author:'Sofia Reyes', role:'Americas Correspondent', time:'6 min read',
+      body:`<p>The February 2025 snap election produced the result polling had long suggested but that the Liberal government had hoped to avoid: a second consecutive minority mandate, with a slimmer margin and more fragmented opposition.</p>
+      <p>The Conservatives made gains in the suburbs of Toronto and Vancouver, eating into traditional Liberal territory among immigrant communities who had once been a reliable base. The NDP held its urban ground. The Bloc consolidated in Quebec. What the result signals is not an ideological shift but a generalised frustration with incumbency and cost-of-living pressures that no single party managed to credibly address.</p>` },
+    a6: { tag:'tag-geo', tagL:'Geopolitics', region:'Europe',
+      title:"The Arctic's New Strategic Importance in Great Power Competition",
+      author:'Elena Marchetti', role:'Senior Europe Correspondent', time:'9 min read',
+      body:`<p>The Arctic is warming four times faster than the global average. By mid-century the Northern Sea Route is expected to be navigable without icebreakers for several months a year — cutting Asia-Europe shipping time by roughly a third compared with the Suez Canal route.</p>
+      <p>With Finland and Sweden now inside NATO, all five Arctic coastal states except Russia are alliance members. Russia, meanwhile, has the world's only nuclear-powered icebreaker fleet and has been steadily remilitarising its Arctic coast since 2014. The gap between Russian Arctic capability and NATO's is one of the alliance's least-discussed vulnerabilities.</p>` },
+    op1: { tag:'tag-geo', tagL:'Essay', region:'Global',
+      title:"The Myth of the Liberal Order's Death",
+      author:'Prof. Peter Wolfe', role:'Harvard Kennedy School', time:'16 min read',
+      body:`<p>Every decade produces a wave of essays announcing that the liberal international order has finally, definitively collapsed. In 1956 it was Suez. In 1971 it was Nixon closing the gold window. In 2003 it was Iraq. In 2016 it was Trump and Brexit. In 2022 it was Ukraine. The order keeps dying and somehow keeps functioning.</p>
+      <p>This is not complacency. The stresses are real. But the diagnosis of collapse consistently confuses the order's many contradictions — which have always existed — with its terminal decline. Its resilience comes not from ideological purity but from the practical interests of states that, despite everything, find the existing architecture more useful than the alternative.</p>
+      <p>What is genuinely new today is the challenge from within: revisionist pressure coming not only from outside powers but from established democracies whose populations have lost confidence in institutions that seem to serve them poorly. That internal erosion is more dangerous than any external challenger — and also more amenable to reform, if the political will exists.</p>` },
+    op2: { tag:'tag-econ', tagL:'Commentary', region:'Global',
+      title:"Why Sanctions Rarely Achieve Their Stated Goals",
+      author:'Dr. Natasha Romova', role:'Centre for Strategic Studies', time:'10 min read',
+      body:`<p>A 2019 meta-analysis of 174 sanction regimes since 1945 found that fewer than 30% produced a concession matching the sender's stated objective — and that number drops further when you control for cases where the target was already inclined to comply.</p>
+      <p>This does not mean sanctions are useless. They impose costs. They signal resolve. They can satisfy domestic political audiences. They can slow specific programmes. But the gap between what policymakers say sanctions will achieve and what they actually achieve is vast — and rarely acknowledged until after the fact. The honest case for sanctions is that they are the least-bad option when military action is off the table and doing nothing is politically unacceptable.</p>` },
+    op3: { tag:'tag-geo', tagL:'Data', region:'Global',
+      title:"Democracy Is Declining — But Not Where You Think",
+      author:'Kenji Hayashi', role:'V-Dem Institute', time:'8 min read',
+      body:`<p>The 2024 V-Dem report identified 42 countries experiencing significant democratic backsliding — the highest since the index began. But the geographic distribution is counterintuitive. The most severe deterioration is not concentrated in post-Soviet states or Sub-Saharan Africa. It is in the Americas, South Asia, and — most troublingly — in established European democracies.</p>
+      <p>The lesson the data suggests is structural: executive power grabs are faster than institutional recovery, even under governments committed to reversal. Poland reversed several years of backsliding after 2023, but the institutional damage — to the judiciary, to public broadcasting — proved harder to repair than to inflict. Democratic resilience is not symmetrical with democratic erosion.</p>` },
+    c1: { tag:'tag-sec', tagL:'Conflict', region:'Eastern Europe',
+      title:"Russia–Ukraine War: The State of Play",
+      author:'Axiom Conflict Desk', role:'Updated daily', time:'10 min read',
+      body:`<p>Now in its third year, the war has settled into attritional front-line fighting across a roughly 1,000-kilometre contact line. Major territorial shifts have become rare. The conflict has moved into a phase that military analysts compare to the latter stages of the First World War: industrialised warfare of position, with enormous casualties for limited ground.</p>
+      <p>Ukraine's Western partners have committed to sustained military and financial support through 2025 and beyond. Russia has placed its economy on a war footing, with defence spending estimated at over 7% of GDP in 2024 — a burden that creates medium-term fiscal pressure but has not yet produced visible economic breakdown.</p>` },
+    c2: { tag:'tag-sec', tagL:'Conflict', region:'East Africa',
+      title:"Sudan Civil War: Descent into Catastrophe",
+      author:'Axiom Conflict Desk', role:'Updated daily', time:'8 min read',
+      body:`<p>The war between Sudan's army and the Rapid Support Forces has produced one of the world's worst humanitarian crises. An estimated 25 million people face acute food insecurity; over 10 million have been displaced — the largest displacement crisis in the world as of mid-2025. Khartoum has been largely destroyed.</p>
+      <p>The conflict has acquired a regional dimension: the UAE has been widely reported as supplying the RSF; Egypt has supported the SAF. UN Security Council resolutions have lacked enforcement mechanisms. Mediation attempts have produced ceasefires that collapsed within weeks.</p>` },
+    c3: { tag:'tag-sec', tagL:'Conflict', region:'Southeast Asia',
+      title:"Myanmar Civil Conflict: The Junta Under Pressure",
+      author:'Axiom Conflict Desk', role:'Updated daily', time:'7 min read',
+      body:`<p>The February 2021 coup triggered a resistance movement that grew into something the junta did not anticipate: a sustained, multi-front armed insurgency. The People's Defence Force, allied with ethnic armed organisations, controls significant territory in the north, northeast, and northwest.</p>
+      <p>By 2024 the resistance had seized key towns near the Chinese border and disrupted junta supply lines. The military's response has been brutal but has not reversed the strategic trend. China has begun engaging more actively with resistance groups to protect its economic interests in the region — a notable shift from its earlier stance of quiet support for the junta.</p>` },
+    c4: { tag:'tag-sec', tagL:'Conflict', region:'Arabian Peninsula',
+      title:"Yemen: Fragile Truce in a Shattered State",
+      author:'Axiom Conflict Desk', role:'Updated daily', time:'7 min read',
+      body:`<p>Yemen's war, now in its eleventh year, has produced what the UN calls the world's worst humanitarian disaster. An estimated 377,000 people have died — the majority from disease and starvation, not combat. The Saudi-led coalition has not achieved its stated goal of restoring the government to Sanaa.</p>
+      <p>The Houthis' entry into the Gaza conflict via Red Sea shipping attacks in late 2023 demonstrated a capacity to project power far beyond Yemen's borders despite years of bombardment — a sobering data point for regional security planners and a complicating factor for any negotiated settlement.</p>` },
+    c5: { tag:'tag-sec', tagL:'Frozen', region:'East Asia',
+      title:"Taiwan Strait: The Slow-Moving Crisis",
+      author:'Axiom Conflict Desk', role:'Updated daily', time:'9 min read',
+      body:`<p>Taiwan's January 2024 presidential election returned the DPP's Lai Ching-te with a plurality. Beijing responded with large-scale military exercises encircling the island — the third such exercise in three years. The pattern has become familiar: Taiwanese democratic expression, PLA military demonstration, diplomatic condemnation, return to baseline.</p>
+      <p>Beneath the surface, the military balance has shifted. The PLA's investment in anti-access capabilities and missile arsenals has changed the scenario calculations that American strategists must run. War games conducted by CSIS and RAND in 2024 produced outcomes highly sensitive to assumptions about US intervention timing and Japanese basing access.</p>` },
+    c6: { tag:'tag-sec', tagL:'Post-Conflict', region:'South Caucasus',
+      title:"Nagorno-Karabakh: After the Final Offensive",
+      author:'Axiom Conflict Desk', role:'Updated daily', time:'6 min read',
+      body:`<p>Azerbaijan's 24-hour offensive of September 2023 ended the existence of the self-proclaimed Republic of Artsakh and produced the near-total displacement of its ethnic Armenian population. Over 100,000 people fled to Armenia in days — one of the fastest ethnic displacement events in post-Cold War Europe.</p>
+      <p>The formal conflict ended with Azerbaijani sovereignty recognised internationally. But a peace treaty between Armenia and Azerbaijan has not been signed, and the status of Armenian cultural and religious heritage sites in Karabakh remains unresolved and deeply contested.</p>` }
+  };
+
+  /* ── Modal ── */
+  function openModal(id) {
+    const d = DB[id]; if (!d) return;
+    document.getElementById('modal-inner').innerHTML = `
+      <span class="tag ${d.tag}">${d.tagL}</span>
+      <h2>${d.title}</h2>
+      <div class="modal-meta">
+        <strong>${d.author}</strong>
+        <span>${d.role}</span>
+        <span>${d.time}</span>
+      </div>
+      <div class="modal-body">${d.body}</div>`;
+    document.getElementById('modal-bg').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal-bg').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── Region filter (syncs nav + region buttons + article cards) ── */
+  function filterRegion(region, el) {
+    // Update nav links
+    document.querySelectorAll('.nav-links a:not(.btn-subscribe)').forEach(a => a.classList.remove('active'));
+    // Update region buttons
+    document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+    if (el.classList.contains('region-btn')) el.classList.add('active');
+    if (el.tagName === 'A') el.classList.add('active');
+
+    // Filter article grid cards
+    document.querySelectorAll('#articles-grid .a-card').forEach(card => {
+      const match = region === 'all' || (card.dataset.region || '').toLowerCase().includes(region);
+      card.style.opacity = match ? '1' : '0.25';
+      card.style.pointerEvents = match ? '' : 'none';
+    });
+  }
+
+  /* ── Conflict monitor tabs ── */
+  function conflictTab(filter, el) {
+    document.querySelectorAll('.m-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.c-row').forEach(row => {
+      row.style.display = (filter === 'all' || row.dataset.level === filter) ? '' : 'none';
+    });
+  }
+
+  /* ── Newsletter ── */
+  function subscribe() {
+    const email = document.getElementById('nl-email').value.trim();
+    const msg   = document.getElementById('nl-msg');
+    if (!email || !email.includes('@')) {
+      msg.className = 'nl-msg err';
+      msg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    msg.className = 'nl-msg ok';
+    msg.textContent = '✓ Subscribed. First brief arrives this Sunday.';
+    document.getElementById('nl-email').value = '';
+  }
+
+  /* ── Mobile nav ── */
+  const toggle = document.getElementById('nav-toggle');
+  const links  = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+</script>
+</body>
+</html>
